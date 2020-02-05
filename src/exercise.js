@@ -33,7 +33,7 @@ function reducer(state = initialState, action){
     case CHANGE_TEXT:
       return {
         ...state,
-        test:action.text
+        text:action.text
       }
     case ADD_TO_LIST:
       return {
@@ -47,3 +47,25 @@ function reducer(state = initialState, action){
 
 const store = createStore(reducer);
 console.log(store.getState());
+
+// 스토어를 구독하기
+const listener=_=>{
+  const state = store.getState();
+  console.log(state);
+}
+const unsubscribe = store.subscribe(listener);
+// 구독 해지하기
+// unsubscribe()
+
+store.dispatch(increase());
+store.dispatch(decrease());
+store.dispatch(changeText("안녕하세요"));
+store.dispatch(addToList({id:1, text:"와우"}));
+
+// 브라우저 콘솔(window)에서 store로 호출해 사용 가능
+window.store = store;
+window.unsubscribe = unsubscribe;
+
+
+// 리덕스와 리액트를 연동할 때 unsubscribe 함수나 getState를 직접 사용하는 일은 미들웨어 사용 전까지는 거의 없음
+// 주로 connect useSelector useStore 등 헬퍼 Hooks를 사용하게 됨
