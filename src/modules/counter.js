@@ -5,8 +5,8 @@ const DECREASE = 'counter/DECREASE';
 
 // 액션 생성 함수
 export const setDiff = diff => ({type: SET_DIFF, diff});
-export const increase = diff => ({type: INCREASE});
-export const decrease = diff => ({type: DECREASE});
+export const increase = _ => ({type: INCREASE});
+export const decrease = _ => ({type: DECREASE});
 
 // 초기 상태 설정
 const initialState = {
