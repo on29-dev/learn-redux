@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function TodoItem({ todo, onToggle }) {
+const TodoItem = React.memo(function TodoItem ({ todo, onToggle }) {
   return (
     <li
       style={{
@@ -11,9 +11,9 @@ function TodoItem({ todo, onToggle }) {
       {todo.text}
     </li>
   )
-}
+});
 
-function TodoList({ todos, onToggle }) {
+const TodoList = React.memo(function TodoList({ todos, onToggle }) {
   return (
     <ul>
       {
@@ -25,7 +25,7 @@ function TodoList({ todos, onToggle }) {
       }
     </ul>
   )
-}
+});
 
 function Todos({ todos, onCreate, onToggle }){
   const [text, setText] = useState('');
@@ -40,7 +40,7 @@ function Todos({ todos, onCreate, onToggle }){
       <form onSubmit={onSubmit}>
         <input
           value={text}
-          onChage={onChange}
+          onChange={onChange}
           placeholder="할 일을 입력하세요..."
         />
         <button type="submit">등록</button>
@@ -50,4 +50,4 @@ function Todos({ todos, onCreate, onToggle }){
   )
 }
 
-export default Todos;
+export default React.memo(Todos);
